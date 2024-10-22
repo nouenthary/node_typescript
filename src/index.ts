@@ -1,6 +1,7 @@
 import express, {NextFunction, Request, Response} from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.get('/', (req: Request, res: Response) => {
 
 // Use user routes
 app.use('/api', userRoutes);
+app.use('/api', authRoutes);
 
 
 app.listen(port, () => {
