@@ -13,12 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role{
+    id       Int      @id @default(autoincrement())
+    roleName String?
+    user User[]
+}
+
 model User {
   id       Int      @id @default(autoincrement())
   name     String
   email    String   @unique
   password String
   createdAt DateTime @default(now())
+  role     Role?       @relation(fields: [roleId], references: [id])
+  roleId   Int?
 }
 
 //  npx prisma migrate dev --name init

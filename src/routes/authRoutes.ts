@@ -29,26 +29,37 @@ const router = Router();
 router.get('/login', async (req: Request, res: Response) => {
     try {
 
+        await prisma.role.create({
+            data: {
+                roleName: "admin",
+            },
+        });
+
         await prisma.user.create({
             data: {
                 name: "admin",
                 email: Math.random() + "_admin@example.com",
                 password: "12345678",
+                roleId: 1,
             },
         });
 
         const users = await prisma.user.findMany({
-            take: 10,
-            skip: 0
+            take: 100,
+            skip: 0,
+            include: {
+                role: true,
+            }
         });
 
         const count = await prisma.user.count({});
 
         res.status(200).json({
-          count,
-          users,
+            count,
+            users,
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({error: 'Failed to fetch users'});
     }
 });
