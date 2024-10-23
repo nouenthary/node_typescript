@@ -37,7 +37,10 @@ router.get('/login', async (req: Request, res: Response) => {
             },
         });
 
-        const users = await prisma.user.findMany({});
+        const users = await prisma.user.findMany({
+            take: 10,
+            skip: 0
+        });
 
         const count = await prisma.user.count({});
 
