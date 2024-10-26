@@ -26,7 +26,7 @@ const router = Router();
 // });
 
 // Get all users
-router.get('/login', async (req: Request, res: Response) => {
+router.get('/auth/user', async (req: Request, res: Response) => {
     try {
 
         await prisma.role.create({

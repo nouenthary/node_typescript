@@ -1,0 +1,30 @@
+# docker-compose.yml
+#version: "3.8"
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    command: sh -c "npx prisma migrate deploy && node dist/app.js"
+    environment:
+      DATABASE_URL: "mysql://root:12345678@localhost:3306/prisma?schema=public"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  db_data:
+
