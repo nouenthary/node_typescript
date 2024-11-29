@@ -1,4 +1,4 @@
-import express, {NextFunction, Request, Response} from 'express';
+import express, {Application, NextFunction, Request, Response} from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
@@ -6,7 +6,7 @@ import roleRoutes from './routes/roleRoutes';
 
 dotenv.config();
 
-const app = express();
+const app : Application = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());

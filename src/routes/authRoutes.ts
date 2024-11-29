@@ -64,5 +64,12 @@ router.get('/auth/user', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/get-test', (req, res) => {
+    res.status(200).json({
+        data: [],
+        message: "home successfully"
+    });
+});
+
 
 export default router;

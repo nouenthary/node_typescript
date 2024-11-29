@@ -11,6 +11,7 @@ router.get("/role", async (req: Request, res: Response) => {
     take: Number(take ?? 10),
     skip: Number(skip ?? 1),
   });
+  //console.log("get roles ");
   res.status(200).json({
     data: role,
   });
